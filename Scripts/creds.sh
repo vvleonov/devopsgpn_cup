@@ -31,7 +31,7 @@ if [ -e "$CREDS" ]; then
     tar xzvf /var/lib/jenkins/credentials.tgz -C /var/lib/jenkins
     echo "All done"
 else
-    echo "Can't see the credentials archive
+    echo "Can't see the credentials archive"
 fi
 
 /etc/init.d/jenkins start

@@ -8,7 +8,7 @@ pipeline {
 
 	environment {
 		registry = "vvleonov/devopsgn"
-		registry_credential = "dockerhub"
+		registry_credential = "DockerHub"
 		HEROKU_API_KEY = credentials('Heroku')
 		docker_image = ""
 
