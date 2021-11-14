@@ -28,7 +28,7 @@ pipeline {
 	
 		stage("Checkout scm"){
 			steps {
-				git branch: "${params.BRANCH}", url: "https://github.com/vvleonov/devopsgpn_cup"  // checkout git branch
+				git branch: "${params.BRANCH}", credentialsId: "GitHub", url: "https://github.com/vvleonov/devopsgpn_cup"  // checkout git branch
 			}
 		}
 	
