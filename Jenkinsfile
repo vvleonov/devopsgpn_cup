@@ -3,20 +3,20 @@ pipeline {
 	agent any
 	
 	parameters {
-	      gitParameter branchFilter: 'origin/(.*)', defaultValue: 'main', name: 'BRANCH', type: 'PT_BRANCH'
+		gitParameter branchFilter: 'origin/(.*)', defaultValue: 'main', name: 'BRANCH', type: 'PT_BRANCH'
 	}
 
 	environment {
-	      registry = "vvleonov/devopsgn"
-	      registry_credential = "dockerhub"
-	      HEROKU_API_KEY = credentials('Heroku')
-	      docker_image = ""
+		registry = "vvleonov/devopsgn"
+		registry_credential = "dockerhub"
+		HEROKU_API_KEY = credentials('Heroku')
+		docker_image = ""
 
 	}
 	
 	options {
-	      timestamps()
-    	}
+		timestamps()
+	}
 	
 	stages{
 	

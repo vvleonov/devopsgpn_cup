@@ -15,7 +15,7 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
     
 apt update
 apt install -y jenkins
-
+echo "Jenkins is installed"
 
 
 # Docker installation
@@ -33,3 +33,7 @@ echo \
     
 apt update
 apt install -y docker-ce docker-ce-cli containerd.io
+echo "Docker is installed"
+
+usermod -aG docker jenkins
+
