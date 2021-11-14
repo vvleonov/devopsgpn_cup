@@ -4,7 +4,7 @@
 
 apt update
 
-apt install -y openjdk-11-jdk
+apt install -y openjdk-11-jdk snapd
 
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | tee \
     /usr/share/keyrings/jenkins-keyring.asc > /dev/null
@@ -36,4 +36,6 @@ apt install -y docker-ce docker-ce-cli containerd.io
 echo "Docker is installed"
 
 usermod -aG docker jenkins
+
+snap install --classic heroku
 
