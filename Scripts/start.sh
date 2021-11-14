@@ -1,51 +1,46 @@
 #!/bin/bash
-# prescript 
-# sed -i -e 's/\r$//' scriptname.sh
-# chmod +x start.sh
-
-
-# Java and Jenkins installation
-
-apt update
-
-apt install -y openjdk-11-jdk
-
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | tee \
-    /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-    
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-    https://pkg.jenkins.io/debian-stable binary/ | tee \
-    /etc/apt/sources.list.d/jenkins.list > /dev/null
-    
-apt update
-apt install -y jenkins
-
-
-
-# Docker installation
-
-apt install -y ca-certificates \
-	    curl \
-	    gnupg \
-	    lsb-release \
-
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg  
-
-echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-    
-apt update
-apt install -y docker-ce docker-ce-cli containerd.io
-
-
 
 
 # Configuring Jenkins credentials
 
-/etc/init.d/jenkins stop
-rm identity.key.enc
-cd /var/lib/jenkins
-git clone .....
-tar xzvf ./credentials.tgz -C ./
+set -e
 
+/etc/init.d/jenkins stop
+echo "Jenkins is stopped"
+
+# [ -e identity.key.enc ] && rm identity.key.enc
+
+if [ -f "identity.key.enc" ]; then
+    rm identity.key.enc
+else
+    echo "There is no identity key. Skipping"
+fi
+
+
+
+
+if [ -d "/var/lib/jenkins" ]; then
+    echo "Looking for credentials"
+else 
+    mkdir /var/lib/jenkins
+    echo "The /var/lib/jenkins directory is created"
+fi
+
+
+
+
+if [ -f ../credentials/credentials.tgz ]; then
+    mv ../credentials/credentials.tgz /var/lib/jenkins
+    cd /var/lib/jenkins
+    tar xzvf ./credentials.tgz -C ./
+    /etc/init.d/jenkins start
+    echo "All done"
+else
+    echo "Can't see the credentials archive. Do you run the script from 'Scripts' diretory?"
+fi
+
+
+# mv ../credentials/credentials.tgz /var/lib/jenkins
+# cd /var/lib/jenkins 
+# tar xzvf ./credentials.tgz -C ./
+# /etc/init.d/jenkins start
