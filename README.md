@@ -31,7 +31,7 @@ install-plugin docker-workflow slack snyk-security-scanner git-parameter
 ```
 - В Jenkins создать запись с id 'GitHub' в credentials (username = API token) и Pipeline с ссылкой на `https://github.com/vvleonov/devopsgpn_cup` (branches to build: \*/\*).
 - Перезапустить машину
-- Можно запускать пайплайн
+- Можно запускать пайплайн (при первом запуске может возникнуть ошибка, связанная с портом докера для локального билда)
 ##### Ссылка на канал в Slack (для получения уведомлений):
 `https://join.slack.com/t/devops-gn/shared_invite/zt-yirs3elz-lStFXdPNyhi18d_qL0z8_Q`
 ##### После завершения работы конвейера приложение будет доступно по адресу :
